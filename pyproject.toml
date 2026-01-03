@@ -1,0 +1,21 @@
+[project]
+name = "bi-analytics-demo"
+version = "1.0.0"
+description = "Business Intelligence Analytics Platform Demo"
+requires-python = ">=3.9"
+dependencies = [
+    "streamlit>=1.29.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "plotly>=5.15.0",
+    "faker>=20.0.0",
+    "python-dotenv>=1.0.0",
+    "streamlit-option-menu>=0.3.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+]
