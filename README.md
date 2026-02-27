@@ -1,272 +1,281 @@
-# BI Analytics Platform Demo
+﻿# BI Analytics Platform Demo
 
-A comprehensive Business Intelligence Analytics Platform demo built with Streamlit to showcase key BI features and capabilities for client presentations.
+> 🌐 [中文版本](#中文说明) | English (Default)
 
-## 🚀 Features
+A comprehensive Business Intelligence Analytics Platform demo built with **Streamlit**, designed to showcase enterprise-grade BI capabilities for client presentations.
 
-### Core Analytics Modules
-- **Daily Summary**: Hourly traffic analysis, session metrics, KPI cards
-- **Weekly Summary**: Week-over-week comparisons, trend analysis
-- **Monthly Summary**: Monthly active users, growth metrics, seasonal patterns
-- **Monetization**: Revenue tracking, MRR/ARR, ARPU, customer lifetime value
-- **User Acquisition**: Channel performance, cost per acquisition, conversion rates
-- **User Retention**: Cohort analysis, retention curves, churn tracking
-- **Custom Analysis**: SQL query editor with sample queries and validation
-
-### Key Features
-- 🔐 **Authentication System**: Simple login (demo: admin/password)
-- 🗄️ **Data Source Management**: Multiple database connections simulation
-- 📊 **Interactive Visualizations**: Plotly charts with real-time data
-- 🔍 **Advanced Filtering**: Date range, region, platform, device filters
-- 📈 **KPI Dashboards**: Metric cards with trend indicators
-- 💻 **SQL Query Editor**: Custom query execution with syntax validation
-- 📱 **Responsive Design**: Works on desktop and mobile devices
-
-## 🛠️ Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- [uv](https://docs.astral.sh/uv/getting-started/installation/) package manager
-
-### Quick Start with uv (Recommended)
-
-1. **Install uv** (if not already installed)
-   ```bash
-   # On macOS and Linux
-   curl -LsSf https://astral.sh/uv/install.sh | sh
-   
-   # On Windows
-   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-   
-   # Or with pip
-   pip install uv
-   ```
-
-2. **Clone or download the demo files**
-   ```bash
-   cd bi_analytics_demo
-   ```
-
-3. **Create virtual environment and install dependencies**
-   ```bash
-   uv sync
-   ```
-
-4. **Run the application**
-   ```bash
-   # Option 1: Using uv run (recommended)
-   uv run streamlit run app.py
-   
-   # Option 2: Using the launcher script
-   uv run python run_demo.py
-   
-   # Option 3: Activate environment manually
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   streamlit run app.py
-   ```
-
-5. **Access the demo**
-   - Open your browser to `http://localhost:8501`
-   - Login with credentials: `admin` / `password`
-
-### Alternative Setup (Traditional pip)
-
-If you prefer using pip instead of uv:
-
-```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-streamlit run app.py
-```
-
-## 📦 Project Structure
-
-```
-bi_analytics_demo/
-├── app.py                 # Main Streamlit application
-├── run_demo.py           # Demo launcher script
-├── pyproject.toml        # Project configuration (uv)
-├── requirements.txt      # Dependencies (pip fallback)
-├── .python-version       # Python version specification
-├── uv.lock              # Dependency lock file
-├── .streamlit/
-│   └── config.toml       # Streamlit configuration
-└── README.md            # This file
-```
-
-## 📊 Demo Data
-
-The application generates realistic mock data for demonstration purposes:
-
-- **User Sessions**: 30 days of daily session data with realistic patterns
-- **Revenue Data**: 90 days of revenue, transactions, and monetization metrics
-- **User Acquisition**: Multi-channel acquisition data with costs and conversion rates
-- **Retention Analysis**: Cohort-based retention data with time-series analysis
-- **Hourly Patterns**: Realistic hourly traffic distribution
-
-## 🎯 Use Cases Demonstrated
-
-### 1. Executive Dashboard
-- High-level KPIs and metrics
-- Trend analysis and growth indicators
-- Revenue and monetization tracking
-
-### 2. Marketing Analytics
-- User acquisition channel performance
-- Cost per acquisition optimization
-- Conversion funnel analysis
-
-### 3. Product Analytics
-- User engagement and retention
-- Feature usage patterns
-- Cohort-based analysis
-
-### 4. Custom Analysis
-- SQL query builder and executor
-- Ad-hoc data exploration
-- Custom metric definitions
-
-## 🔧 Technical Architecture
-
-### Frontend
-- **Streamlit**: Web application framework
-- **Plotly**: Interactive data visualizations
-- **Pandas**: Data manipulation and analysis
-- **NumPy**: Numerical computations
-
-### Data Generation
-- **Faker**: Realistic fake data generation
-- **Random**: Statistical data simulation
-- **DateTime**: Time-series data handling
-
-### Features Demonstrated
-- **Database Schema Introspection**: Simulated table/column validation
-- **Metric Validation**: Check if selected metrics exist in database
-- **Query Execution**: Safe SQL query execution with syntax validation
-- **Caching**: Streamlit caching for performance optimization
-- **Error Handling**: Graceful error handling and user feedback
-
-## 📋 Demo Script for Client Presentation
-
-### 1. Introduction (2 minutes)
-- "This is our BI Analytics Platform demo showcasing enterprise-grade analytics capabilities"
-- Login demonstration with authentication
-- Overview of the modular architecture
-
-### 2. Data Source Management (3 minutes)
-- Show multiple data source connections (PostgreSQL, MySQL, SQLite, BigQuery)
-- Demonstrate filter system (date range, region, platform, device)
-- Explain real-time connection status and validation
-
-### 3. Core Analytics Modules (10 minutes)
-
-**Daily Analysis:**
-- Real-time KPI cards with trend indicators
-- Hourly traffic distribution charts
-- Detailed metrics table with drill-down capability
-
-**Weekly/Monthly Analysis:**
-- Period-over-period comparisons
-- Growth trend visualization
-- Seasonal pattern analysis
-
-**Monetization Dashboard:**
-- Revenue tracking and forecasting
-- MRR/ARR calculations
-- Customer lifetime value analysis
-- Revenue breakdown by product/segment
-
-### 4. Advanced Features (8 minutes)
-
-**User Acquisition:**
-- Multi-channel attribution analysis
-- Cost per acquisition optimization
-- ROI calculation by marketing channel
-
-**Retention Analysis:**
-- Cohort-based retention curves
-- Churn prediction and analysis
-- User lifecycle tracking
-
-**Custom SQL Editor:**
-- Live query execution
-- Syntax validation and error handling
-- Pre-built query templates
-- Security features (read-only access)
-
-### 5. Technical Capabilities (5 minutes)
-- Database schema introspection
-- Metric validation against database structure
-- Query performance optimization
-- Error handling and user feedback
-- Responsive design demonstration
-
-### 6. Scalability & Enterprise Features (2 minutes)
-- Multi-tenant architecture ready
-- Role-based access control
-- Audit logging capabilities
-- API-first design for integrations
-
-## 🔒 Security Features Demonstrated
-
-- **Authentication**: User login system
-- **Query Validation**: Only SELECT statements allowed
-- **Input Sanitization**: SQL injection prevention
-- **Access Control**: Role-based permissions (simulated)
-- **Audit Logging**: Query execution tracking
-
-## 📈 Performance Features
-
-- **Caching**: Intelligent data caching for faster load times
-- **Lazy Loading**: On-demand data generation
-- **Query Optimization**: Efficient data processing
-- **Responsive UI**: Fast, interactive user interface
-
-## 🎨 Customization Options
-
-The demo can be easily customized for specific client needs:
-
-- **Branding**: Colors, logos, and styling
-- **Data Sources**: Add specific database connections
-- **Metrics**: Custom KPIs and business metrics
-- **Visualizations**: Industry-specific chart types
-- **Workflows**: Custom analysis workflows
-
-## 📞 Next Steps
-
-After the demo, discuss:
-
-1. **Custom Implementation**: Tailored solution for client's specific needs
-2. **Data Integration**: Connecting to client's existing databases
-3. **Advanced Features**: AI/ML analytics, predictive modeling
-4. **Deployment**: Cloud infrastructure and scaling options
-5. **Training**: User training and documentation
-6. **Support**: Ongoing maintenance and support plans
-
-## 🚀 Production Considerations
-
-For actual implementation, consider:
-
-- **Database Connections**: Real database integration with connection pooling
-- **Authentication**: Enterprise SSO integration (SAML, OAuth)
-- **Performance**: Query optimization and caching strategies
-- **Security**: Data encryption, access controls, audit trails
-- **Scalability**: Microservices architecture, load balancing
-- **Monitoring**: Application performance monitoring and alerting
+![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python) ![Streamlit](https://img.shields.io/badge/Streamlit-1.x-red?logo=streamlit) ![Plotly](https://img.shields.io/badge/Plotly-Interactive-green?logo=plotly) ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ---
 
-**Demo Credentials:**
-- Username: `admin`
-- Password: `password`
+## ✨ Features
 
-**Contact Information:**
-- For technical questions about implementation
-- For custom demo requests
-- For pricing and licensing information
+| Module | Description |
+|---|---|
+| 📈 **Daily** | Hourly traffic, session KPIs, real trend deltas |
+| 📊 **Weekly** | Week-over-week comparisons, conversion tracking |
+| 📅 **Monthly** | MAU growth, page views, month-over-month trends |
+| 💰 **Monetization** | Revenue, MRR, ARPU, product breakdown |
+| 👥 **Acquisition** | Channel performance, CPA, organic vs paid share |
+| 🔄 **Retention** | Cohort analysis, retention curves, day 1/7/30/90 |
+| 🔧 **Custom SQL** | Query editor with syntax validation & mock execution |
+
+**Platform highlights:**
+- 🔐 Demo login system (`admin` / `password`)
+- 🗄️ Multi data source selector (PostgreSQL, MySQL, BigQuery, SQLite)
+- 📊 Plotly interactive charts throughout
+- 🔍 Date range, region, platform & device filters
+- ⚡ Streamlit caching for fast load times
+- 📱 Responsive layout for desktop & mobile
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python **3.8+**
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) package manager *(recommended)*
+
+### Install & Run
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/lenzyh/bi_analytics.git
+cd bi_analytics
+
+# 2. Install dependencies
+uv sync
+
+# 3. Launch the app
+uv run streamlit run app.py
+```
+
+Open [http://localhost:8501](http://localhost:8501) and log in with `admin` / `password`.
+
+### Alternative (pip)
+
+```bash
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+source .venv/bin/activate
+
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📁 Project Structure
+
+```
+bi_analytics/
+├── app.py               # Main Streamlit application
+├── run_demo.py          # CLI launcher script
+├── pyproject.toml       # Project config (uv)
+├── requirements.txt     # Dependencies (pip fallback)
+├── uv.lock              # Dependency lock file
+├── .python-version      # Python version pin
+├── .streamlit/
+│   └── config.toml      # Streamlit server config
+└── README.md
+```
+
+---
+
+## 🛠️ Tech Stack
+
+- **[Streamlit](https://streamlit.io/)** — Web app framework
+- **[Plotly](https://plotly.com/python/)** — Interactive visualizations
+- **[Pandas](https://pandas.pydata.org/)** — Data manipulation
+- **[NumPy](https://numpy.org/)** — Numerical computation
+- **[Faker](https://faker.readthedocs.io/)** — Realistic mock data
+
+---
+
+## 📊 Demo Data
+
+All data is synthetically generated with a fixed seed (`numpy.random.default_rng(42)`) for **reproducibility**:
+
+- 30 days of daily session data with realistic weekday/weekend patterns
+- 90 days of revenue, transactions, and ARPU metrics
+- Multi-channel user acquisition with costs and conversion rates
+- 6-month cohort retention data (Day 1 / 7 / 30 / 90)
+- 24-hour traffic distribution simulating real usage peaks
+
+---
+
+## 🔒 Security
+
+- Only `SELECT` queries permitted in the SQL editor
+- Input validation on all query submissions
+- Authentication gate before any dashboard access
+- Role-based access control (simulated)
+
+---
+
+## 🎨 Customisation
+
+This demo is built to be easily adapted:
+
+- **Branding** — swap colours, fonts, logos in `app.py` CSS block
+- **Data sources** — replace mock generators with real DB connectors
+- **Metrics** — add custom KPIs per business domain
+- **Charts** — extend with Plotly chart types as needed
+
+---
+
+## 📞 Next Steps
+
+1. Custom implementation tailored to your data sources
+2. Real database integration (PostgreSQL / BigQuery / Snowflake)
+3. SSO / OAuth authentication
+4. Cloud deployment (AWS / GCP / Azure)
+5. AI/ML predictive analytics layer
+
+---
+
+## 🔑 Demo Credentials
+
+| Field | Value |
+|---|---|
+| Username | `admin` |
+| Password | `password` |
+
+---
+
+---
+
+# 中文说明
+
+> 🌐 [English Version](#bi-analytics-platform-demo) | 中文（说明）
+
+基于 **Streamlit** 构建的商业智能分析平台演示项目，适用于客户演示和 BI 能力展示。
+
+---
+
+## ✨ 功能模块
+
+| 模块 | 说明 |
+|---|---|
+| 📈 **每日分析** | 小时级流量、会话 KPI、真实环比变化 |
+| 📊 **每周分析** | 周同比对比、转化率跟踪 |
+| 📅 **每月分析** | MAU 增长、页面浏览量、月同比趋势 |
+| 💰 **变现分析** | 营收、MRR、ARPU、产品收入拆解 |
+| 👥 **用户获取** | 渠道表现、获客成本、自然/付费占比 |
+| 🔄 **用户留存** | 队列分析、留存曲线、第 1/7/30/90 天留存率 |
+| 🔧 **自定义 SQL** | SQL 编辑器，支持语法校验与模拟执行 |
+
+**平台亮点：**
+- 🔐 演示登录系统（`admin` / `password`）
+- 🗄️ 多数据源选择（PostgreSQL、MySQL、BigQuery、SQLite）
+- 📊 全页面使用 Plotly 交互图表
+- 🔍 日期范围、地区、平台、设备筛选器
+- ⚡ Streamlit 缓存加速加载
+- 📱 响应式布局，支持桌面与移动端
+
+---
+
+## 🚀 快速开始
+
+### 环境要求
+- Python **3.8+**
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) 包管理器（推荐）
+
+### 安装与运行
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/lenzyh/bi_analytics.git
+cd bi_analytics
+
+# 2. 安装依赖
+uv sync
+
+# 3. 启动应用
+uv run streamlit run app.py
+```
+
+打开 [http://localhost:8501](http://localhost:8501)，使用 `admin` / `password` 登录。
+
+### 备选方式（pip）
+
+```bash
+python -m venv .venv
+# Windows：
+.venv\Scripts\activate
+# macOS/Linux：
+source .venv/bin/activate
+
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📁 项目结构
+
+```
+bi_analytics/
+├── app.py               # Streamlit 主应用
+├── run_demo.py          # 命令行启动脚本
+├── pyproject.toml       # 项目配置（uv）
+├── requirements.txt     # 依赖列表（pip 备用）
+├── uv.lock              # 依赖锁定文件
+├── .python-version      # Python 版本指定
+├── .streamlit/
+│   └── config.toml      # Streamlit 服务器配置
+└── README.md
+```
+
+---
+
+## 🛠️ 技术栈
+
+- **Streamlit** — Web 应用框架
+- **Plotly** — 交互式数据可视化
+- **Pandas** — 数据处理
+- **NumPy** — 数值计算
+- **Faker** — 真实感模拟数据生成
+
+---
+
+## 📊 演示数据说明
+
+所有数据均为合成数据，使用固定随机种子（`numpy.random.default_rng(42)`）生成，确保**结果可复现**：
+
+- 30 天每日会话数据，含工作日/周末真实波动
+- 90 天营收、交易量、ARPU 指标
+- 多渠道用户获取数据（含成本与转化率）
+- 6 个月队列留存数据（第 1/7/30/90 天）
+- 24 小时流量分布，模拟真实使用高峰
+
+---
+
+## 🔒 安全说明
+
+- SQL 编辑器仅允许 `SELECT` 查询
+- 所有查询提交均进行输入校验
+- 仪表盘访问前设有登录验证门控
+- 模拟基于角色的权限控制
+
+---
+
+## 🎨 自定义说明
+
+本项目易于按需定制：
+
+- **品牌** — 修改 `app.py` CSS 区块中的颜色、字体、Logo
+- **数据源** — 将模拟数据生成器替换为真实数据库连接
+- **指标** — 按业务域添加自定义 KPI
+- **图表** — 按需扩展 Plotly 图表类型
+
+---
+
+## 🔑 演示登录信息
+
+| 字段 | 值 |
+|---|---|
+| 用户名 | `admin` |
+| 密码 | `password` |
