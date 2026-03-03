@@ -2,14 +2,11 @@
 developmentMode = false
 
 [server]
-headless = false
-enableCORS = false
-enableXsrfProtection = false
+headless = true
 maxUploadSize = 200
 
 [browser]
 gatherUsageStats = false
-showErrorDetails = true
 
 [theme]
 primaryColor = "#00d4aa"
