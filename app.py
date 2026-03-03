@@ -58,6 +58,8 @@ st.set_page_config(
 # CUSTOM CSS - Dark Theme
 # ══════════════════════════════════════════════════════════════════════════════
 
+st.markdown('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">', unsafe_allow_html=True)
+
 st.markdown("""
 <style>
     /* Brand colors: primary green #00d4aa, dark bg #0d1117 */
@@ -141,6 +143,102 @@ st.markdown("""
     /* Table styling */
     .dataframe {
         font-size: 0.85rem;
+    }
+
+    /* ── Mobile Responsive (iPhone 16 Pro Max: 430px) ── */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 1.4rem;
+            letter-spacing: 0;
+        }
+        .sub-header {
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        /* Stack all Streamlit columns vertically */
+        [data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+        }
+        [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+            width: 100% !important;
+            flex: 0 0 100% !important;
+            min-width: 0 !important;
+        }
+        /* KPI metric cards: 2 per row */
+        [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="stColumn"] {
+            width: 48% !important;
+            flex: 0 0 48% !important;
+        }
+        [data-testid="stMetric"] {
+            padding: 0.4rem 0.2rem;
+        }
+        [data-testid="stMetric"] label {
+            font-size: 0.65rem !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricValue"] {
+            font-size: 1rem !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+            font-size: 0.65rem !important;
+        }
+        /* Tabs: horizontal scroll on mobile */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 4px;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+            display: none;
+        }
+        .stTabs [data-baseweb="tab"] {
+            padding: 6px 10px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        /* Charts: full width, reduce height */
+        .js-plotly-plot {
+            width: 100% !important;
+        }
+        /* Dataframe: scroll horizontally */
+        [data-testid="stDataFrame"] {
+            overflow-x: auto !important;
+        }
+        /* Sidebar: collapse by default handled by Streamlit */
+        section[data-testid="stSidebar"] {
+            min-width: 0 !important;
+        }
+        /* Radio buttons: more compact */
+        [data-testid="stRadio"] > div {
+            gap: 0.3rem !important;
+        }
+        /* Quick-ask buttons: stack vertically */
+        .stButton > button {
+            font-size: 0.75rem !important;
+            padding: 0.4rem 0.6rem !important;
+        }
+        /* Reduce overall padding */
+        .main .block-container {
+            padding: 0.5rem 0.8rem !important;
+        }
+        .metric-card {
+            padding: 0.5rem;
+        }
+    }
+
+    /* Extra small screens (< 430px) */
+    @media (max-width: 430px) {
+        .main-header {
+            font-size: 1.2rem;
+        }
+        .sub-header {
+            font-size: 0.7rem;
+        }
+        .main .block-container {
+            padding: 0.3rem 0.5rem !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -1013,13 +1111,15 @@ def show_core_metrics(trades_df, users_df, filters):
     ret_df = load_retention_data()
     avg_d1 = ret_df['d1'].mean() * 100
 
-    c1, c2, c3, c4, c5, c6 = st.columns(6)
-    c1.metric(t('trading_volume_24h'), f"${total_vol / 30:,.0f}", "+8.2%")
-    c2.metric(t('dau'), f"{dau:,}", "+5.1%")
-    c3.metric(t('mau'), f"{mau:,}", "+12.3%")
-    c4.metric(t('retention_d1'), f"{avg_d1:.1f}%", "+1.8%")
-    c5.metric(t('fee_revenue'), f"${total_fees:,.0f}", "+15.4%")
-    c6.metric(t('avg_spread'), f"{avg_spread:.1f}", "-0.8")
+    # KPI cards: 2 rows of 3 for better mobile layout
+    r1c1, r1c2, r1c3 = st.columns(3)
+    r1c1.metric(t('trading_volume_24h'), f"${total_vol / 30:,.0f}", "+8.2%")
+    r1c2.metric(t('dau'), f"{dau:,}", "+5.1%")
+    r1c3.metric(t('mau'), f"{mau:,}", "+12.3%")
+    r2c1, r2c2, r2c3 = st.columns(3)
+    r2c1.metric(t('retention_d1'), f"{avg_d1:.1f}%", "+1.8%")
+    r2c2.metric(t('fee_revenue'), f"${total_fees:,.0f}", "+15.4%")
+    r2c3.metric(t('avg_spread'), f"{avg_spread:.1f}", "-0.8")
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
@@ -1356,28 +1456,31 @@ def _show_real_time_prices():
     price_df = pd.DataFrame(rows)
     st.dataframe(price_df, use_container_width=True, hide_index=True)
 
-    # Sparkline charts for top 6 coins
+    # Sparkline charts for top 6 coins (2 rows of 3 for mobile)
     st.markdown(f"### {t('sparkline')} - Top 6")
-    spark_cols = st.columns(6)
-    for i, coin in enumerate(prices[:6]):
-        sparkline_data = coin.get('sparkline_in_7d', {}).get('price', [])
-        if sparkline_data:
-            with spark_cols[i]:
-                symbol = coin.get('symbol', '').upper()
-                ch_7d = coin.get('price_change_percentage_7d_in_currency', 0) or 0
-                color = '#00d4aa' if ch_7d >= 0 else '#f85149'
-                fig = go.Figure(go.Scatter(
-                    y=sparkline_data, mode='lines',
-                    line=dict(color=color, width=2),
-                    fill='tozeroy', fillcolor=f"rgba({','.join(str(int(color.lstrip('#')[i:i+2], 16)) for i in (0, 2, 4))},0.1)"
-                ))
-                fig.update_layout(
-                    title=dict(text=f"{symbol} ({ch_7d:+.1f}%)", font=dict(size=12)),
-                    height=150, margin=dict(l=5, r=5, t=30, b=5),
-                    xaxis=dict(visible=False), yaxis=dict(visible=False),
-                    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-                )
-                st.plotly_chart(fig, use_container_width=True)
+    top_coins = prices[:6]
+    for row_start in range(0, len(top_coins), 3):
+        row_coins = top_coins[row_start:row_start + 3]
+        spark_cols = st.columns(len(row_coins))
+        for i, coin in enumerate(row_coins):
+            sparkline_data = coin.get('sparkline_in_7d', {}).get('price', [])
+            if sparkline_data:
+                with spark_cols[i]:
+                    symbol = coin.get('symbol', '').upper()
+                    ch_7d = coin.get('price_change_percentage_7d_in_currency', 0) or 0
+                    color = '#00d4aa' if ch_7d >= 0 else '#f85149'
+                    fig = go.Figure(go.Scatter(
+                        y=sparkline_data, mode='lines',
+                        line=dict(color=color, width=2),
+                        fill='tozeroy', fillcolor=f"rgba({','.join(str(int(color.lstrip('#')[j:j+2], 16)) for j in (0, 2, 4))},0.1)"
+                    ))
+                    fig.update_layout(
+                        title=dict(text=f"{symbol} ({ch_7d:+.1f}%)", font=dict(size=12)),
+                        height=150, margin=dict(l=5, r=5, t=30, b=5),
+                        xaxis=dict(visible=False), yaxis=dict(visible=False),
+                        paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1416,12 +1519,13 @@ def show_news_sentiment(filters):
     coin_sentiment = sent_exploded.groupby('coins')['compound'].mean().reset_index()
     coin_sentiment = coin_sentiment[coin_sentiment['coins'].isin(COINS)]
 
-    # Display gauges in 2 rows of 5
+    # Display gauges in rows of 3 for mobile friendliness
     gauge_coins = coin_sentiment.sort_values('coins')
-    rows = [gauge_coins.iloc[:5], gauge_coins.iloc[5:10]] if len(gauge_coins) > 5 else [gauge_coins]
+    per_row = 3
+    rows = [gauge_coins.iloc[i:i + per_row] for i in range(0, len(gauge_coins), per_row)]
 
     for row_data in rows:
-        cols = st.columns(min(5, len(row_data)))
+        cols = st.columns(min(per_row, len(row_data)))
         for idx, (_, row) in enumerate(row_data.iterrows()):
             with cols[idx]:
                 score = row['compound']
@@ -1562,9 +1666,8 @@ def show_bi_agent(trades_df, users_df):
         st.error("OpenAI library not installed. Run: pip install openai")
         return
 
-    # Quick-ask buttons
+    # Quick-ask buttons (2 per row for mobile)
     st.markdown(f"#### {t('quick_ask')}")
-    qcol1, qcol2, qcol3, qcol4 = st.columns(4)
     quick_questions = [
         "What's the top performing coin by volume?",
         "Analyze user retention trends",
@@ -1573,12 +1676,14 @@ def show_bi_agent(trades_df, users_df):
     ]
 
     quick_q = None
+    qcol1, qcol2 = st.columns(2)
     with qcol1:
         if st.button(quick_questions[0], use_container_width=True):
             quick_q = quick_questions[0]
     with qcol2:
         if st.button(quick_questions[1], use_container_width=True):
             quick_q = quick_questions[1]
+    qcol3, qcol4 = st.columns(2)
     with qcol3:
         if st.button(quick_questions[2], use_container_width=True):
             quick_q = quick_questions[2]
